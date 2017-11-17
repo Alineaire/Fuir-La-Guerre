@@ -62,7 +62,8 @@ public class Scene : MonoBehaviour
 			{
 				image.color = color;
 			}
-		}, endColor, settings.fadeDuration);
+		}, endColor, settings.fadeDuration)
+			.SetEase(Ease.Linear);
 
 		return fadeTween;
 	}
