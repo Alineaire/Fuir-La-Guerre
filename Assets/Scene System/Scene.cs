@@ -24,6 +24,7 @@ public class Scene : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
+		JoystickReceiver.Spawn(gameObject);
 
 		if (settings != null)
 		{

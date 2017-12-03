@@ -7,7 +7,6 @@ public class SceneManager : MonoBehaviour
 	public static SceneManager instance;
 
 	public SceneSettings settings;
-
 	private int sceneIndex;
 
 	private void Awake()
@@ -15,6 +14,7 @@ public class SceneManager : MonoBehaviour
 		Assert.IsTrue(UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings > 1);
 
 		instance = this;
+		JoystickReceiver.Spawn(gameObject);
 
 		if (Display.displays.Length > 1)
 		{
