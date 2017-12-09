@@ -7,13 +7,13 @@ public class InputMoveCharacter : MonoBehaviour {
 	public float speed;
 	public bool canUp, canDown, canLeft, canRight;
 
-	Vector3 direction;
+	protected Vector3 direction;
 
 	protected virtual void Awake() {
 
 	}
 
-	void Update () {
+	protected virtual void Update () {
 
 		bool _isInput = false;
 
@@ -45,8 +45,6 @@ public class InputMoveCharacter : MonoBehaviour {
 	}
 
 	protected virtual void DirectionAnimation(bool _input) {
-		if (_input)
-			Debug.Log ("ok");
 
 	}
 
