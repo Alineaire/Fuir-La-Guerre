@@ -109,6 +109,7 @@ public class JoystickReceiver : MonoBehaviour
 	{
 		const int comSpeed = 115200;
 
+
 		var comPorts = SerialPort.GetPortNames();
 		if (comPorts.Length == 0)
 		{
@@ -124,6 +125,7 @@ public class JoystickReceiver : MonoBehaviour
 		if (serial.IsOpen)
 		{
 			Debug.LogFormat("COM port {0} is open.", comPort);
+			serial.ReadTimeout = 1; // RMSHR : added 08-12-2017 prevents Unity Crash on my PC
 		}
 		else
 		{
