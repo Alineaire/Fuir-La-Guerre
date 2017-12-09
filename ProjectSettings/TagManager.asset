@@ -9,6 +9,7 @@ TagManager:
   - DeadZone
   - Fast
   - Slow
+  - Scene_2_Bloc
   layers:
   - Default
   - TransparentFX
