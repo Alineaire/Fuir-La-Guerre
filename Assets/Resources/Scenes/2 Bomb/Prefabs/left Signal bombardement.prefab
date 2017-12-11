@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114664923092661966}
   - component: {fileID: 82073540468126422}
   m_Layer: 0
-  m_Name: Signal bombardement
+  m_Name: left Signal bombardement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,7 +7,13 @@ public class ConditionEcranSuivant : MonoBehaviour {
 	public GameObject leftScreenGameGroup, leftScreenDisplayGroup;
 	public GameObject rightScreenGameGroup, rightScreenDisplayGroup;
 
-	void Start() {
+	protected Scene _scene;
+
+	void Awake() {
+		_scene = GameObject.FindObjectOfType<Scene> () as Scene;
+	}
+
+	protected virtual void Start() {
 		leftScreenGameGroup.SetActive (true);
 		leftScreenDisplayGroup.SetActive (false);
 
@@ -23,5 +29,9 @@ public class ConditionEcranSuivant : MonoBehaviour {
 
 		rightScreenGameGroup.SetActive (true);
 		rightScreenDisplayGroup.SetActive (false);
+	}
+
+	public virtual void NextScene() {
+		_scene.TransitionToNextScene ();
 	}
 }

@@ -6,37 +6,55 @@ public class Scene_2_explosion : MonoBehaviour {
 
 	public float radiusDestruction = 1f;
 	public float radiusProjection = 2f;
+	public float explosionForce = 50f;
 	public string tagToDestroy = "Scene_2_Bloc";
 	public string tagForPeople = "Character";
 	public GameObject deadPeoplePrefab;
 
 	void Start () {
 		
-		// overlap to destroy buildings
-		Collider2D[] contacts = Physics2D.OverlapCircleAll (transform.position, radiusDestruction);
+		DetectEnvironment ();
 
-		if (contacts.Length == 0)
-			return;
+		DetectHumans ();
+	}
 
-		for (int i = 0; i < contacts.Length; i++) {
-			if (contacts [i].tag == tagToDestroy) {
-				Destroy (contacts [i].gameObject);
-				return;
-			}
-		}
-
+	void DetectHumans() {
 		// overlap to project people
 
-		contacts = Physics2D.OverlapCircleAll (transform.position, radiusProjection);
+		Collider2D[] humanContacts = Physics2D.OverlapCircleAll (transform.position, radiusProjection);
 
-		if (contacts.Length == 0)
-			return;
+		if (humanContacts.Length > 0) {
 
-		for (int i = 0; i < contacts.Length; i++) {
-			if (contacts [i].tag == tagForPeople) {
-				Vector3 peoplePos = contacts [i].transform.position;
-				Destroy (contacts [i].gameObject);
-				Instantiate (deadPeoplePrefab, peoplePos, Quaternion.identity);
+
+
+			for (int i = 0; i < humanContacts.Length; i++) {
+				if (humanContacts [i].tag == tagForPeople) {
+					Vector3 peoplePos = humanContacts [i].transform.position;
+					Destroy (humanContacts [i].gameObject);
+					GameObject g = Instantiate (deadPeoplePrefab, peoplePos, Quaternion.identity) as GameObject;
+
+					Vector3 _direction = g.transform.position - transform.position;
+					_direction.Normalize ();
+
+					g.GetComponent<Rigidbody2D> ().AddForceAtPosition (_direction * explosionForce, transform.position);
+				}
+			}
+		}
+	}
+
+	void DetectEnvironment() {
+		// overlap to destroy buildings
+
+		Collider2D[] contacts = Physics2D.OverlapCircleAll (transform.position, radiusDestruction);
+
+
+		if (contacts.Length > 0) {
+
+			for (int i = 0; i < contacts.Length; i++) {
+				if (contacts [i].tag == tagToDestroy) {
+					Destroy (contacts [i].gameObject);
+					return;
+				}
 			}
 		}
 	}

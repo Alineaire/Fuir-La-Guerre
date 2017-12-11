@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114471746130057422}
   - component: {fileID: 82677103919421836}
   m_Layer: 0
-  m_Name: explosion
+  m_Name: left explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc20a4a378560348b71f4e71f1fc78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusDestruction: 200
-  radiusProjection: 400
+  radiusDestruction: 100
+  radiusProjection: 200
+  explosionForce: 50000
   tagToDestroy: Scene_2_Bloc
   tagForPeople: Player
   deadPeoplePrefab: {fileID: 1728919502218068, guid: 6c07e0a6dcf8438448188fa861bdcab9,

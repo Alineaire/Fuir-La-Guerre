@@ -8,9 +8,18 @@ public class Scene_2_Character : MonoBehaviour {
 
 	private Vector3 direction;
 	private Animator _animator;
+	private Rigidbody2D _rigidbody2D;
 
 	void Awake() {
 		_animator = GetComponent<Animator> ();
+		_rigidbody2D = GetComponent<Rigidbody2D> ();
+
+		//_animator.GetCurrentAnimatorStateInfo (0).normalizedTime = Random.Range (0f, 1f);
+
+	}
+
+	void Start() {
+		_animator.Play ("Animation Character", 0, Random.Range (0f, 1f));
 	}
 
 	void Update () {
@@ -42,6 +51,7 @@ public class Scene_2_Character : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		transform.Translate (direction * speed * Time.deltaTime);
+		//transform.Translate (direction * speed * Time.deltaTime);
+		_rigidbody2D.velocity = direction * speed * Time.deltaTime;
 	}
 }

@@ -4,39 +4,79 @@ using UnityEngine;
 
 public class Scene_2_Bombardement : ConditionEcranSuivant {
 
-	public GameObject prefabSignal;
-	public float delayBeforeBomb;
+	[Header("Left")]
+	public GameObject leftPrefabSignal;
+	public float leftDelayBeforeBomb;
+	public Transform[] leftScenarioBombardement;
 
-	public Transform[] scenarioBombardement;
+	[Header("Right")]
+	public GameObject rightPrefabSignal;
+	public float rightDelayBeforeBomb;
+	public Transform[] rightScenarioBombardement;
+
 
 	private float cpt;
 	private int etapeScenario = -1;
 
-	void Start() {
-		cpt = delayBeforeBomb;
+	public enum Scene_2_enum_scenario
+	{
+		left,
+		right}
+
+	;
+
+	public Scene_2_enum_scenario scenario = Scene_2_enum_scenario.left;
+
+	protected override void Start() {
+		base.Start ();
+		cpt = leftDelayBeforeBomb;
 	}
 
 	void Update () {
+		
 		cpt += Time.deltaTime;
 
-		if (cpt < delayBeforeBomb)
-			return;
+		if (scenario == Scene_2_enum_scenario.left) {
+			
+			// LEFT
 
-		Bombardement ();
+			if (cpt < leftDelayBeforeBomb)
+				return;
+
+			Bombardement (leftPrefabSignal, leftScenarioBombardement);
+
+		} else {
+			
+			// RIGHT
+
+			if (cpt < rightDelayBeforeBomb)
+				return;
+
+			Bombardement (rightPrefabSignal, rightScenarioBombardement);
+		}
 	}
 
-	void Bombardement() {
+	void Bombardement(GameObject _prefab, Transform[] _scen) {
 		cpt = 0f;
 
 		etapeScenario++;
 
-		if (etapeScenario >= scenarioBombardement.Length) {
-			NextScreen();
-			enabled = false;
+		if (etapeScenario >= _scen.Length) {
+			EndScreen ();
 			return;
 		}
 
-		Instantiate (prefabSignal, scenarioBombardement [etapeScenario].position, Quaternion.identity);
+		Instantiate (_prefab, _scen [etapeScenario].position, Quaternion.identity);
 
+	}
+
+	void EndScreen() {
+		if (scenario == Scene_2_enum_scenario.left) {
+			etapeScenario = -1;
+			scenario = Scene_2_enum_scenario.right;
+			NextScreen ();
+		} else {
+			NextScene ();
+		}
 	}
 }

@@ -37,14 +37,16 @@ public class Scene : MonoBehaviour
 			color = fadeColor;
 
 			var canvases = FindObjectsOfType<Canvas>();
-			Assert.AreEqual(2, canvases.Length, "There should be two Canvas objects, one for each display.");
+			//Assert.AreEqual(2, canvases.Length, "There should be two Canvas objects, one for each display.");
 			foreach (var canvas in canvases)
 			{
-				var fadeOverlay = Instantiate(settings.fadeOverlayPrefab, canvas.transform);
+				if (canvas.tag == "GameCanvas") {
+					var fadeOverlay = Instantiate (settings.fadeOverlayPrefab, canvas.transform);
 
-				var image = fadeOverlay.GetComponent<Image>();
-				image.color = color;
-				images.Add(image);
+					var image = fadeOverlay.GetComponent<Image> ();
+					image.color = color;
+					images.Add (image);
+				}
 			}
 		}
 	}
