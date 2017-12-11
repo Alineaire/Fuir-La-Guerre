@@ -7,6 +7,14 @@ public class ConditionEcranSuivant : MonoBehaviour {
 	public GameObject leftScreenGameGroup, leftScreenDisplayGroup;
 	public GameObject rightScreenGameGroup, rightScreenDisplayGroup;
 
+	void Start() {
+		leftScreenGameGroup.SetActive (true);
+		leftScreenDisplayGroup.SetActive (false);
+
+		rightScreenGameGroup.SetActive (false);
+		rightScreenDisplayGroup.SetActive (true);
+	}
+
 	public virtual void NextScreen()
 	{
 		// switch screen
