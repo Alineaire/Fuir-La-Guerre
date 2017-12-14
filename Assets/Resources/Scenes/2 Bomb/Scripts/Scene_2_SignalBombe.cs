@@ -15,7 +15,9 @@ public class Scene_2_SignalBombe : MonoBehaviour {
 		if (cpt < delayToExplode)
 			return;
 
-		Instantiate (explosionrefab, transform.position, Quaternion.identity);
+		GameObject g = Instantiate (explosionrefab, transform.position, Quaternion.identity) as GameObject;
+		g.transform.parent = transform.parent;
+
 		Destroy (gameObject);
 	}
 }

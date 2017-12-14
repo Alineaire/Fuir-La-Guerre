@@ -8,12 +8,17 @@ public class Scene_2_Bombardement : ConditionEcranSuivant {
 	public GameObject leftPrefabSignal;
 	public float leftDelayBeforeBomb;
 	public Transform[] leftScenarioBombardement;
+	public Transform leftTransformParent;
+	public int leftHumanAlive = 4;
+	public GameObject leftJoystickUI;
 
 	[Header("Right")]
 	public GameObject rightPrefabSignal;
 	public float rightDelayBeforeBomb;
 	public Transform[] rightScenarioBombardement;
-
+	public Transform rightTransformParent;
+	public int rightHumanAlive = 4;
+	public GameObject rightJoystickUI;
 
 	private float cpt;
 	private int etapeScenario = -1;
@@ -43,7 +48,7 @@ public class Scene_2_Bombardement : ConditionEcranSuivant {
 			if (cpt < leftDelayBeforeBomb)
 				return;
 
-			Bombardement (leftPrefabSignal, leftScenarioBombardement);
+			Bombardement (leftPrefabSignal, leftScenarioBombardement, leftTransformParent);
 
 		} else {
 			
@@ -52,11 +57,11 @@ public class Scene_2_Bombardement : ConditionEcranSuivant {
 			if (cpt < rightDelayBeforeBomb)
 				return;
 
-			Bombardement (rightPrefabSignal, rightScenarioBombardement);
+			Bombardement (rightPrefabSignal, rightScenarioBombardement, rightTransformParent);
 		}
 	}
 
-	void Bombardement(GameObject _prefab, Transform[] _scen) {
+	void Bombardement(GameObject _prefab, Transform[] _scen, Transform _t) {
 		cpt = 0f;
 
 		etapeScenario++;
@@ -66,7 +71,8 @@ public class Scene_2_Bombardement : ConditionEcranSuivant {
 			return;
 		}
 
-		Instantiate (_prefab, _scen [etapeScenario].position, Quaternion.identity);
+		GameObject g = Instantiate (_prefab, _scen [etapeScenario].position, Quaternion.identity) as GameObject;
+		g.transform.parent = _t;
 
 	}
 
@@ -77,6 +83,20 @@ public class Scene_2_Bombardement : ConditionEcranSuivant {
 			NextScreen ();
 		} else {
 			NextScene ();
+		}
+	}
+
+	public void OneKill(bool _isLeftHuman) {
+		if (_isLeftHuman) {
+			leftHumanAlive--;
+
+			if (leftHumanAlive <= 0)
+				leftJoystickUI.SetActive (false);
+		} else {
+			rightHumanAlive--;
+
+			if (rightHumanAlive <= 0)
+				rightJoystickUI.SetActive (false);
 		}
 	}
 }

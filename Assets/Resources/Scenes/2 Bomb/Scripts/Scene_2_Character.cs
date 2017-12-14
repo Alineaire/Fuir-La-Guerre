@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Scene_2_Character : Character {
 
+	public bool isLeftHuman = true;
+	public bool canCountDead = false;
+	public Scene_2_Bombardement condition;
+
 	void Start() {
 		_animator.Play ("Animation Character", 0, Random.Range (0f, 1f));
 	}
@@ -32,5 +36,11 @@ public class Scene_2_Character : Character {
 
 	void FixedUpdate() {
 		_rigidbody2D.velocity = direction * speed * Time.deltaTime;
+	}
+
+	public void CountDead() {
+		if (canCountDead) {
+			condition.OneKill (isLeftHuman);
+		}
 	}
 }

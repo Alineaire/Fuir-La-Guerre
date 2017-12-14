@@ -243,7 +243,7 @@ MonoBehaviour:
   frequency: 1
   delayToPlay: 0
   frequencyFactor: 0.98
-  delayPerInput: 0.25
+  delayPerInput: 0.1
 --- !u!1 &59428189
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +645,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_TargetDisplay: 1
 --- !u!224 &179939787
 RectTransform:
@@ -716,7 +716,7 @@ MonoBehaviour:
   frequency: 1
   delayToPlay: 0
   frequencyFactor: 1.01
-  delayPerInput: 0.25
+  delayPerInput: 0.1
 --- !u!82 &213727486
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2570,7 +2570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1612574636
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3333,7 +3333,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_TargetDisplay: 0
 --- !u!224 &2139932347
 RectTransform:

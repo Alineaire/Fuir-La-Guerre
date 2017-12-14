@@ -11,6 +11,7 @@ TagManager:
   - Slow
   - Scene_2_Bloc
   - GameCanvas
+  - RightGame
   layers:
   - Default
   - TransparentFX

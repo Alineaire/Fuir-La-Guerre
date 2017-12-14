@@ -8,6 +8,7 @@ public class Scene_1_InputBallRight : Scene_1_InputBall {
 	public int actualPass = 0;
 	public float delayToWait = 3f;
 	private float cpt;
+	public GameObject joystickUI;
 
 	protected override void Update ()
 	{
@@ -44,7 +45,9 @@ public class Scene_1_InputBallRight : Scene_1_InputBall {
 
 	void Pass() {
 		actualPass++;
-		if (actualPass >= minPassToBreak)
+		if (actualPass >= minPassToBreak) {
 			_animator.SetTrigger ("Boom");
+			joystickUI.SetActive (false);
+		}
 	}
 }

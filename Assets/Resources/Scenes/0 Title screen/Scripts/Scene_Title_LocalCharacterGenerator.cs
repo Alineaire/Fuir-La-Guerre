@@ -6,13 +6,20 @@ public class Scene_Title_LocalCharacterGenerator : MonoBehaviour {
 
 	public float timer;
 	public GameObject prefabToInstanciate;
+	public Vector2 direction;
+	public float speed;
 
 	private float cpt;
 
 	void Update () {
-		if (cpt < 0f) {
-			cpt = timer;
-			Instantiate (prefabToInstanciate, transform.position, Quaternion.identity);
+		transform.Translate (direction * Time.deltaTime * speed);
+
+		cpt += Time.deltaTime;
+
+		if (cpt >= timer) {
+			cpt = 0f;
+			GameObject g = Instantiate (prefabToInstanciate, transform.position, Quaternion.identity) as GameObject;
+			//g.transform.parent = transform;
 		}
 	}
 }

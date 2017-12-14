@@ -8,6 +8,9 @@ public class Scene_3_Character : Character {
 	public float jumpForce = 500f;
 	public float delayBeforeNextJump = 0.5f; // prevent sound repetition
 	private float cptNextJump;
+	bool isJumping = false;
+	public float jumpSecurity = 1f;
+	private float cptJumpSecurity;
 
 	[Header("Ground")]
 	public Transform groundTransform;
@@ -56,9 +59,11 @@ public class Scene_3_Character : Character {
 		if (grounded && cptNextJump >= delayBeforeNextJump) {
 
 			cptNextJump = 0f;
-			_rigidbody2D.AddForce (Vector2.up * jumpForce);
+			_rigidbody2D.AddForce (new Vector2(0.5f, 1f) * jumpForce);
 			grounded = false;
 			_audio.PlayOneShot (jumpClip);
+			isJumping = true;
+			cptJumpSecurity = jumpSecurity;
 		}
 	}
 
@@ -83,7 +88,14 @@ public class Scene_3_Character : Character {
 
 		cptNextJump += Time.deltaTime;
 
-		grounded = Physics2D.OverlapCircle (groundTransform.position, groundRadius, whatIsGround);
+		if (!isJumping)
+			grounded = Physics2D.OverlapCircle (groundTransform.position, groundRadius, whatIsGround);
+		else {
+			cptJumpSecurity -= Time.deltaTime;
+			if (cptJumpSecurity <= 0f) {
+				isJumping = false;
+			}
+		}
 	}
 
 	protected override void ReleaseInput()
@@ -104,6 +116,9 @@ public class Scene_3_Character : Character {
 	}
 
 	void FixedUpdate() {
-		_rigidbody2D.velocity = new Vector2(direction.x * speed, _rigidbody2D.velocity.y);
+		if(grounded)
+			_rigidbody2D.velocity = new Vector2(direction.x * speed, _rigidbody2D.velocity.y);
+		else
+			_rigidbody2D.velocity = _rigidbody2D.velocity;
 	}
 }

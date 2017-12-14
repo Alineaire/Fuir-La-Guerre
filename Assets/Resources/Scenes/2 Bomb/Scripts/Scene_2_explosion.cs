@@ -30,9 +30,10 @@ public class Scene_2_explosion : MonoBehaviour {
 			for (int i = 0; i < humanContacts.Length; i++) {
 				if (humanContacts [i].tag == tagForPeople) {
 					Vector3 peoplePos = humanContacts [i].transform.position;
+					humanContacts [i].GetComponent<Scene_2_Character> ().CountDead ();
 					Destroy (humanContacts [i].gameObject);
 					GameObject g = Instantiate (deadPeoplePrefab, peoplePos, Quaternion.identity) as GameObject;
-
+					g.transform.parent = transform.parent;
 					Vector3 _direction = g.transform.position - transform.position;
 					_direction.Normalize ();
 

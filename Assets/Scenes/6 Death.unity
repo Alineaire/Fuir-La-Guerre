@@ -386,7 +386,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_TargetDisplay: 1
 --- !u!224 &179939787
 RectTransform:
@@ -969,7 +969,7 @@ MonoBehaviour:
   leftScreenDisplayGroup: {fileID: 780658306}
   rightScreenGameGroup: {fileID: 586061868}
   rightScreenDisplayGroup: {fileID: 259885603}
-  minPass: 4
+  minPass: 8
   actualPass: 0
 --- !u!1 &1134871668
 GameObject:
@@ -2589,7 +2589,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_TargetDisplay: 0
 --- !u!224 &2139932347
 RectTransform:

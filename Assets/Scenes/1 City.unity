@@ -1603,7 +1603,7 @@ MonoBehaviour:
   leftScreenDisplayGroup: {fileID: 618090534}
   rightScreenGameGroup: {fileID: 586061868}
   rightScreenDisplayGroup: {fileID: 805320397}
-  minPass: 2
+  minPass: 8
   actualPass: 0
 --- !u!1 &1293430179
 GameObject:
@@ -2383,6 +2383,7 @@ MonoBehaviour:
   minPassToBreak: 3
   actualPass: 0
   delayToWait: 5
+  joystickUI: {fileID: 1125700658}
 --- !u!1 &1841915920
 GameObject:
   m_ObjectHideFlags: 0
