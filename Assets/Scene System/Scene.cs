@@ -1,12 +1,17 @@
 ﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 public class Scene : MonoBehaviour
 {
 	public static Scene instance;
+
+	private enum Transition
+	{
+		In,
+		Out,
+	};
 
 	private Tween fadeTween;
 	private Color color, fadeColor, gameColor;
@@ -40,22 +45,35 @@ public class Scene : MonoBehaviour
 			//Assert.AreEqual(2, canvases.Length, "There should be two Canvas objects, one for each display.");
 			foreach (var canvas in canvases)
 			{
-				if (canvas.tag == "GameCanvas") {
-					var fadeOverlay = Instantiate (settings.fadeOverlayPrefab, canvas.transform);
+				if (canvas.tag == "GameCanvas")
+				{
+					var fadeOverlay = Instantiate(settings.fadeOverlayPrefab, canvas.transform);
 
-					var image = fadeOverlay.GetComponent<Image> ();
+					var image = fadeOverlay.GetComponent<Image>();
 					image.color = color;
-					images.Add (image);
+					images.Add(image);
 				}
 			}
 		}
 	}
 
-	private Tween Fade(Color endColor)
+	private Tween Fade(Transition transition)
 	{
 		if (fadeTween != null)
 		{
 			fadeTween.Complete();
+		}
+
+		Color endColor = gameColor;
+		switch (transition)
+		{
+			case Transition.In:
+				endColor = gameColor;
+				break;
+
+			case Transition.Out:
+				endColor = fadeColor;
+				break;
 		}
 
 		fadeTween = DOTween.To(() => color, newColor =>
@@ -68,6 +86,15 @@ public class Scene : MonoBehaviour
 		}, endColor, settings.fadeDuration)
 			.SetEase(Ease.Linear);
 
+		if (transition == Transition.Out)
+		{
+			var audioSources = FindObjectsOfType<AudioSource>();
+			foreach (var audioSource in audioSources)
+			{
+				audioSource.DOFade(0, settings.fadeDuration);
+			}
+		}
+
 		return fadeTween;
 	}
 
@@ -75,7 +102,7 @@ public class Scene : MonoBehaviour
 	{
 		if (settings != null)
 		{
-			Fade(gameColor);
+			Fade(Transition.In);
 		}
 	}
 
@@ -98,7 +125,7 @@ public class Scene : MonoBehaviour
 
 		if (settings != null)
 		{
-			Fade(fadeColor)
+			Fade(Transition.Out)
 				.OnComplete(() =>
 				{
 					SceneManager.instance.LoadNextScene();
