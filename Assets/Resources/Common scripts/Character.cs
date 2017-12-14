@@ -12,6 +12,7 @@ public class Character : MonoBehaviour {
 
 	protected bool isDead = false;
 
+
 	protected virtual void Awake() {
 		_animator = GetComponent<Animator> ();
 		_rigidbody2D = GetComponent<Rigidbody2D> ();

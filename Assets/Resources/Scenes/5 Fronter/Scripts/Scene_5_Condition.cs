@@ -2,15 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scene_5_Condition : MonoBehaviour {
+public class Scene_5_Condition : ConditionEcranSuivant {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public int leftLive = 3;
+
 }

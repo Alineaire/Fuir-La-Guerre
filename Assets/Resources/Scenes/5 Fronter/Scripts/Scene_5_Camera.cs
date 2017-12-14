@@ -20,6 +20,7 @@ public class Scene_5_Camera : MonoBehaviour {
 
 	void Awake() {
 		_animator = GetComponent<Animator> ();
+		cpt = Random.Range (0f, delayWait);
 	}
 
 	void Update () {
