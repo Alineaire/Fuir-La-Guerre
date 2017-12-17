@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scene System/Scene Manager.unity
     guid: af661594696e4b84ab5c5f4ac2101c84
   - enabled: 1
+    path: Assets/Scenes/JoystickTests.unity
+    guid: e1dfca00c93659f42ab74f615204e5fe
+  - enabled: 1
     path: Assets/Scenes/0 Title Screen.unity
     guid: 5cc5d95bff325784e870ea187645b35d
   - enabled: 1
