@@ -1,9 +1,9 @@
 #include <painlessMesh.h>
-#include <WiFi.hpp>
+#include "conf.hpp"
 
 #define EMITTER true
 #define RECEIVER false
-#define DEBUG_WIFI false
+#define DEBUG_LOG false
 
 static painlessMesh mesh;
 
@@ -36,7 +36,7 @@ static Task taskSendButtons(TASK_MILLISECOND * 10, TASK_FOREVER, &sendButtons);
 
 static void receiveCallback(uint32_t from, String &msg)
 {
-#if DEBUG_WIFI
+#if DEBUG_LOG
 	Serial.printf("Received from %u msg=%s\n", from, msg.c_str());
 #endif
 
@@ -45,7 +45,7 @@ static void receiveCallback(uint32_t from, String &msg)
 #endif
 }
 
-#if DEBUG_WIFI
+#if DEBUG_LOG
 
 static void newConnectionCallback(uint32_t nodeId)
 {
@@ -83,7 +83,7 @@ void setup()
 	mesh.init(MESH_SSID, MESH_PASSWORD, MESH_PORT);
 	mesh.onReceive(&receiveCallback);
 
-#if DEBUG_WIFI
+#if DEBUG_LOG
 	mesh.onNewConnection(&newConnectionCallback);
 	mesh.onChangedConnections(&changedConnectionCallback);
 	mesh.onNodeTimeAdjusted(&nodeTimeAdjustedCallback);
